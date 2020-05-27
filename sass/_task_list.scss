@@ -1,0 +1,91 @@
+@keyframes task-exit {
+	from {
+		-webkit-transform: perspective(400px);
+		transform: perspective(400px);
+	}
+
+	30% {
+		-webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+		opacity: 1;
+	}
+
+	to {
+		-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+		opacity: 0;
+	}
+}
+
+.exit {
+	-webkit-animation-duration: 0.75s;
+	animation-duration: 0.75s;
+	-webkit-animation-name: task-exit;
+	animation-name: task-exit;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-fill-mode: forwards;
+}
+
+#task-list {
+	height: 40vh;
+	margin-left: 6rem;
+	margin-top: 3rem;
+	margin-bottom: 0;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	user-select: none;
+	font-size: 16px;
+
+	li {
+		list-style: none;
+		font-size: 4.5em;
+		margin: 0.34em 0;
+		margin-right: 2em;
+		color: rgba($color: var(--text-color), $alpha: 1);
+	}
+
+	@media (max-width: 1500px) {
+		font-size: 10px;
+	}
+	@media (max-width: 1400px) {
+		font-size: 10px;
+	}
+	@media (max-width: 1300px) {
+		font-size: 8px;
+	}
+	@media (max-width: 1200px) {
+		font-size: 8px;
+	}
+	@media (max-width: 1100px) {
+		font-size: 6px;
+		flex-wrap: nowrap;
+		height: auto;
+		align-items: center;
+		margin: 3rem 0 12rem;
+
+		li {
+			margin: 1rem 0;
+			font-size: 4rem;
+		}
+	}
+
+	$list-sizes: (
+		"3": 3.2em,
+		"5": 2.8em,
+		"9": 2.5em,
+		"12": 2em,
+		"20": 1.8em,
+		"25": 1.6em,
+		"30": 1.2em
+	);
+
+	@each $min, $size in $list-sizes {
+		li:first-child:nth-last-child(n + #{$min}),
+		li:first-child:nth-last-child(n + #{$min}) ~ li {
+			font-size: #{$size};
+		}
+	}
+}
