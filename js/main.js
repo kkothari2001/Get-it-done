@@ -140,3 +140,22 @@ function reset() {
  $(window).on('load', function () {
     $("#preloader").delay(3500).fadeOut('slow');
 });
+
+/**
+ * Modified Code for menu i.e. hamburger 
+ */
+
+// const menu = document.querySelector("input");
+const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('#menu');
+console.log(hamburger);
+hamburger.addEventListener('click', ()=>{
+   hamburger.classList.toggle("active");
+   document.querySelector(".spare").classList.toggle("active");
+   menu.classList.toggle("active");
+});
+document.querySelector(".spare").addEventListener('click', ()=>{
+	document.querySelector(".spare").classList.toggle("active");
+	menu.classList.toggle("active");
+	hamburger.classList.toggle("active");
+});

@@ -5,7 +5,7 @@
 	color: rgba($color: var(--text-color), $alpha: 1);
 }
 
-input#menu:checked {
+#menu.active {
 	~ #menu-controller {
 		transform: translate(-10vw);
 	}
@@ -20,6 +20,22 @@ input#menu:checked {
 		transition: transform 0.5s 0.4s;
 	}
 }
+
+// input#menu:checked {
+// 	~ #menu-controller {
+// 		transform: translate(-10vw);
+// 	}
+// 	~ #menu-dimmed-bg {
+// 		visibility: visible;
+// 		transform: translate(0);
+// 		transition: transform 1s 0s;
+// 	}
+// 	~ #menu-content {
+// 		opacity: 1;
+// 		transform: translate(0);
+// 		transition: transform 0.5s 0.4s;
+// 	}
+// }
 
 #menu-controller {
 	width: calc(4.5vw + 70px);
@@ -206,7 +222,7 @@ input#menu:checked {
 		}
 	}
 
-	input#menu:checked {
+	#menu.active {
 		~ #menu-controller {
 			transform: translate(0, -15vh);
 		}
