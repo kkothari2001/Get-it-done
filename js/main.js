@@ -138,14 +138,13 @@ function reset() {
  * JQuery for fadeOut() i.e. for preloader's animation
  */
  $(window).on('load', function () {
-    $("#preloader").delay(3500).fadeOut('slow');
+    $("#preloader").delay(1000).fadeOut('slow');
 });
 
 /**
  * Modified Code for menu i.e. hamburger 
  */
 
-// const menu = document.querySelector("input");
 const hamburger = document.querySelector('.hamburger');
 const menu = document.querySelector('#menu');
 console.log(hamburger);

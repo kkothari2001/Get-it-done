@@ -785,17 +785,18 @@ body {
   font-size: 2rem;
   text-transform: uppercase;
   background-color: transparent;
-  opacity: 0.36;
   outline: none;
   border: none;
   color: rgba(var(--text-color), 1);
 }
 
 #input-section label {
+  position: relative;
   visibility: hidden;
   color: rgba(var(--text-color), 1);
   font-size: 1rem;
   opacity: 0.5;
+  top: 2.5rem;
 }
 
 #input-section input:focus + label {
@@ -804,18 +805,22 @@ body {
 
 #input-section ::-webkit-input-placeholder {
   color: inherit;
+  opacity: 0.36;
 }
 
 #input-section :-ms-input-placeholder {
   color: inherit;
+  opacity: 0.36;
 }
 
 #input-section ::-ms-input-placeholder {
   color: inherit;
+  opacity: 0.36;
 }
 
 #input-section ::placeholder {
   color: inherit;
+  opacity: 0.36;
 }
 
 @media (max-width: 1400px) {
@@ -833,15 +838,21 @@ body {
   }
   #input-section input {
     width: 100%;
-    margin: 10rem 0 0.5rem;
+    margin: 5rem 0 0.5rem;
     font-size: 3rem;
     text-align: center;
   }
   #input-section label {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     text-align: center;
     font-weight: 500;
     text-transform: uppercase;
+  }
+  #input-section #text-input-details {
+    position: relative;
+    margin: 0.5rem 0 0.5rem;
+    font-size: 1.6rem;
+    bottom: 2.3rem;
   }
 }
 
