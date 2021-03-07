@@ -133,3 +133,10 @@ function reset() {
 	deleteAllTasks(completedTaskStore);
 	updateTasks();
 }
+
+/**
+ * JQuery for fadeOut() i.e. for preloader's animation
+ */
+ $(window).on('load', function () {
+    $("#preloader").delay(3500).fadeOut('slow');
+});
