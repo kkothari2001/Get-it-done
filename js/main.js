@@ -1,4 +1,5 @@
 const input = document.getElementById("task-input");
+const inputDetail = document.getElementById("text-input-details");
 const totalTasks = document.getElementById("total");
 const completedTasks = document.getElementById("completed");
 const modal = document.getElementById("modal");
@@ -17,9 +18,10 @@ function updateTasks() {
 		let innerHTML = "";
 		for (let i = 0; i < tasks.length; i++) {
 			innerHTML += `
-	        <li data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
-	        ${tasks[i].title}
-	        </li>
+	        <div data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
+	        <h2>${tasks[i].title}</h2>
+			<p>${tasks[i].detail}</p>
+	        </div>
 	        `;
 		}
 		list.innerHTML = innerHTML;
@@ -34,6 +36,30 @@ function updateTasks() {
 		list.innerHTML = innerHTML;
 	});
 }
+
+// function updateTasks() {
+// 	readTasks(taskStore, function(tasks) {
+// 		let list = document.getElementById("task-list");
+// 		let innerHTML = "";
+// 		for (let i = 0; i < tasks.length; i++) {
+// 			innerHTML += `
+// 	        <li data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
+// 	        ${tasks[i].title}
+// 	        </li>
+// 	        `;
+// 		}
+// 		list.innerHTML = innerHTML;
+// 	});
+// 	readTasks(completedTaskStore, function(tasks) {
+// 		let list = document.getElementById("completed-task-list");
+// 		let innerHTML = "";
+// 		tasks.reverse();
+// 		for (let i = 0; i < Math.min(tasks.length, maxRecentlyDeleted); i++) {
+// 			innerHTML += `<li class="invert">${tasks[i].title}: <span>${tasks[i].completedDate}</span></li>`;
+// 		}
+// 		list.innerHTML = innerHTML;
+// 	});
+// }
 
 function onLoad() {
 	updateTasks();
@@ -50,6 +76,7 @@ function deleteTaskOnClick(elem) {
 		let completedTask = new CompletedTask(task.title);
 		addTask(completedTaskStore, completedTask, function() {
 			elem.classList.add("exit");
+
 			elem.addEventListener("animationend", function() {
 				deleteTask(taskStore, id, function() {
 					let amountOfTasks = Number(loadData("TotalTasks")) - 1;
@@ -68,8 +95,9 @@ function deleteTaskOnClick(elem) {
 
 input.addEventListener("keydown", function(e) {
 	if (e.keyCode === 13) {
-		let task = new Task(input.value);
+		let task = new Task(input.value, inputDetail.value);
 		input.value = "";
+		inputDetail.value = "";
 		if (task.title.length === 0) {
 			return;
 		}
@@ -81,6 +109,12 @@ input.addEventListener("keydown", function(e) {
 		});
 	}
 });
+
+// inputDetail.addEventListener("keydown", function(event){
+// 	if(KeyboardEvent.code === 13){
+
+// 	}
+// });
 
 function updateTheme(theme) {
 	console.log(theme);

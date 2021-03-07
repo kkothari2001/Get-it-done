@@ -1,3 +1,4 @@
+
 .hamburger{
     position: relative;
     left: 33px;
@@ -26,6 +27,7 @@
         border-color: rgba($color: var(--text-color), $alpha: 1.0);
         border-radius: 50%;
         animation: hamburgerPulse 1s ease infinite;
+    
     }
 
     .bar{
@@ -48,23 +50,25 @@
             transition: .4s ease;
             transition-property: top, bottom;
         }
-        
+
         &::after{
             top: 11px;
         }
-
         &::before{
             bottom: 11px;
         }
     }
 
-    .active .bar{
-        &::before{
-            bottom: 0;
-        }
-        &::after{
-            top: 0;
-        }
+    @media (max-width: 1100px) {
+        margin: auto;
+        display: flex;
+        left: 0;
+    }
+    
+    @media (max-width: 500px) {
+        margin: auto;
+        display: flex;
+        left: 0;
     }
 
     @keyframes hamburgerPulse{
@@ -76,20 +80,18 @@
             transform: scale(1.5);
         }
     }
-
-    @media (max-width: 1100px) {
-        margin: auto;
-        display: flex;
-        left: 0;
-    }
-
-    @media (max-width: 500px) {
-        margin: auto;
-        display: flex;
-        left: 0;
-    }
-    
 }
+
+.hamburger.active{
+    .bar{
+        &::before{
+            bottom: 0;
+        }
+        &::after{
+            top: 0;
+        }
+    }
+} 
 
 .spare{
     @media (max-width: 1100px) {

@@ -16,7 +16,6 @@
 		opacity: 0;
 	}
 }
-
 .exit {
 	-webkit-animation-duration: 0.75s;
 	animation-duration: 0.75s;
@@ -31,9 +30,10 @@
 	height: 40vh;
 	margin-left: 6rem;
 	margin-top: 3rem;
+	margin-right: 6rem;
 	margin-bottom: 0;
 	display: flex;
-	flex-direction: column;
+	// flex-direction: column;
 	flex-wrap: wrap;
 	align-content: flex-start;
 	user-select: none;
@@ -87,6 +87,23 @@
 		li:first-child:nth-last-child(n + #{$min}),
 		li:first-child:nth-last-child(n + #{$min}) ~ li {
 			font-size: #{$size};
+		}
+	}
+
+	div{
+		box-sizing: border-box;
+		@include cardStyle;
+		padding: 1rem 1rem;
+		max-width: 40%;
+		height: fit-content;
+		margin-bottom: 2em;
+		h2{
+			font-weight: 700;
+			text-transform: uppercase;
+			font-size: 1.5rem;
+		}
+		p{
+			font-size: 1rem;
 		}
 	}
 }
