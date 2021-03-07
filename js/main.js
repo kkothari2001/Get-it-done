@@ -31,7 +31,7 @@ function updateTasks() {
 		let innerHTML = "";
 		tasks.reverse();
 		for (let i = 0; i < Math.min(tasks.length, maxRecentlyDeleted); i++) {
-			innerHTML += `<li class="invert">${tasks[i].title}: <span>${tasks[i].completedDate}</span></li>`;
+			innerHTML += `<li class="invert">${tasks[i].title} : <span>${tasks[i].completedDate}</span></li>`;
 		}
 		list.innerHTML = innerHTML;
 	});
@@ -73,7 +73,7 @@ function deleteTaskOnClick(elem) {
 	let id = Number(elem.dataset.id);
 
 	let task = readOneTask(taskStore, id, function(task) {
-		let completedTask = new CompletedTask(task.title);
+		let completedTask = new CompletedTask(task.title, task.detail);
 		addTask(completedTaskStore, completedTask, function() {
 			elem.classList.add("exit");
 
@@ -110,11 +110,22 @@ input.addEventListener("keydown", function(e) {
 	}
 });
 
-// inputDetail.addEventListener("keydown", function(event){
-// 	if(KeyboardEvent.code === 13){
-
-// 	}
-// });
+inputDetail.addEventListener("keydown", function(e){
+	if(e.keyCode === 13){		
+		let task = new Task(input.value, inputDetail.value);
+		input.value = "";
+		inputDetail.value = "";
+		if (task.title.length === 0) {
+			return;
+		}
+		addTask(taskStore, task, function() {
+			let amountOfTasks = Number(loadData("TotalTasks")) + 1;
+			saveData("TotalTasks", amountOfTasks);
+			totalTasks.innerHTML = loadData("TotalTasks");
+			updateTasks();
+		});
+	}
+});
 
 function updateTheme(theme) {
 	console.log(theme);
