@@ -17,7 +17,7 @@ function updateTasks() {
 		let innerHTML = "";
 		for (let i = 0; i < tasks.length; i++) {
 			innerHTML += `
-	        <li data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this);'>
+	        <li data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
 	        ${tasks[i].title}
 	        </li>
 	        `;
