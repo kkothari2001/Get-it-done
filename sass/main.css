@@ -1221,8 +1221,7 @@ body {
   z-index: -1;
 }
 
-.hamburger .bar::after,
-.hamburger .bar::before {
+.hamburger .bar::after, .hamburger .bar::before {
   content: '';
   border-radius: 10px;
   position: absolute;
@@ -1244,32 +1243,12 @@ body {
   bottom: 11px;
 }
 
-.hamburger.active .bar::before {
+.hamburger .active .bar::before {
   bottom: 0;
 }
 
-.hamburger.active .bar::after {
+.hamburger .active .bar::after {
   top: 0;
-}
-
-@media (max-width: 1100px) {
-  .hamburger {
-    margin: auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    left: 0;
-  }
-}
-
-@media (max-width: 500px) {
-  .hamburger {
-    margin: auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    left: 0;
-  }
 }
 
 @-webkit-keyframes hamburgerPulse {
@@ -1295,6 +1274,50 @@ body {
     opacity: 0;
     -webkit-transform: scale(1.5);
             transform: scale(1.5);
+  }
+}
+
+@media (max-width: 1100px) {
+  .hamburger {
+    margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    left: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .hamburger {
+    margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    left: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .spare {
+    top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .spare {
+    top: 10px;
+  }
+}
+
+@media (max-width: 1100px) {
+  h4 {
+    padding-top: 1.5em;
+  }
+}
+
+@media (max-width: 500px) {
+  h4 {
+    padding-top: 1.5em;
   }
 }
 /*# sourceMappingURL=main.css.map */
