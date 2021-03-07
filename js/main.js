@@ -18,8 +18,8 @@ function updateTasks() {
 		let innerHTML = "";
 		for (let i = 0; i < tasks.length; i++) {
 			innerHTML += `
-	        <div data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
-	        <h2>${tasks[i].title}</h2>
+	        <div>
+	        <h2 data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>${tasks[i].title}</h2>
 			<p>${tasks[i].detail}</p>
 	        </div>
 	        `;
@@ -37,30 +37,6 @@ function updateTasks() {
 	});
 }
 
-// function updateTasks() {
-// 	readTasks(taskStore, function(tasks) {
-// 		let list = document.getElementById("task-list");
-// 		let innerHTML = "";
-// 		for (let i = 0; i < tasks.length; i++) {
-// 			innerHTML += `
-// 	        <li data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
-// 	        ${tasks[i].title}
-// 	        </li>
-// 	        `;
-// 		}
-// 		list.innerHTML = innerHTML;
-// 	});
-// 	readTasks(completedTaskStore, function(tasks) {
-// 		let list = document.getElementById("completed-task-list");
-// 		let innerHTML = "";
-// 		tasks.reverse();
-// 		for (let i = 0; i < Math.min(tasks.length, maxRecentlyDeleted); i++) {
-// 			innerHTML += `<li class="invert">${tasks[i].title}: <span>${tasks[i].completedDate}</span></li>`;
-// 		}
-// 		list.innerHTML = innerHTML;
-// 	});
-// }
-
 function onLoad() {
 	updateTasks();
 	updateTheme(loadData("ToDoTheme"));
@@ -75,7 +51,7 @@ function deleteTaskOnClick(elem) {
 	let task = readOneTask(taskStore, id, function(task) {
 		let completedTask = new CompletedTask(task.title, task.detail);
 		addTask(completedTaskStore, completedTask, function() {
-			elem.classList.add("exit");
+			elem.parentNode.classList.add("exit");
 
 			elem.addEventListener("animationend", function() {
 				deleteTask(taskStore, id, function() {
@@ -183,7 +159,7 @@ function reset() {
  * JQuery for fadeOut() i.e. for preloader's animation
  */
  $(window).on('load', function () {
-    $("#preloader").delay(1000).fadeOut('slow');
+    $("#preloader").delay(3000).fadeOut('slow');
 });
 
 /**

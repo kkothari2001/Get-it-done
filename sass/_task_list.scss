@@ -38,7 +38,6 @@
 	align-content: flex-start;
 	user-select: none;
 	font-size: 16px;
-	cursor: pointer;
 
 	li {
 		list-style: none;
@@ -91,19 +90,23 @@
 	}
 
 	div{
-		box-sizing: border-box;
 		@include cardStyle;
+		color: rgba($color: var(--text-color), $alpha: 1);
+		box-sizing: border-box;
 		padding: 1rem 1rem;
 		max-width: 40%;
 		height: fit-content;
 		margin-bottom: 2em;
+
 		h2{
 			font-weight: 700;
 			text-transform: uppercase;
 			font-size: 1.5rem;
+			cursor: pointer;
 		}
 		p{
 			font-size: 1rem;
+			text-transform: capitalize;
 		}
 	}
 }
