@@ -154,3 +154,26 @@ body {
 	padding-left: .5em;
 }
 
+::selection {
+	color: rgba(var(--bg-color), $alpha: 1);
+	background: rgba(var(--text-color), $alpha: 1);
+}
+
+::-webkit-scrollbar{
+    width: 12px;
+}
+
+::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background: linear-gradient(rgba($color: var(--gradient-1), $alpha: 1), rgba($color: var(--gradient-2), $alpha: 1));;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba($color: var(--bg-color), $alpha: 1.0);
+    border-radius: 10px;
+	box-shadow: inset 0 0 2px rgba($color: var(--text-color), $alpha: 1.0);
+}
+
+::-webkit-scrollbar-thumb:window-inactive{
+    background: rgba($color: var(--text-color), $alpha: 1.0);
+}
