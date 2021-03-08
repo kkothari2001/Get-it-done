@@ -1073,6 +1073,41 @@ body {
   }
 }
 
+#priority-container {
+  display: inline-block;
+  position: relative;
+  color: rgba(var(--text-color), 1);
+  left: 47.5%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+#priority-container .priority {
+  padding: .5em;
+  height: 36px;
+  width: 9px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+@media (max-width: 1100px) {
+  #priority-container .priority {
+    height: 24px;
+    width: 6px;
+  }
+}
+
+@media (max-width: 500px) {
+  #priority-container .priority {
+    height: 16px;
+    width: 4px;
+  }
+}
+
+#priority-container .activate {
+  opacity: 1;
+}
+
 @-webkit-keyframes task-exit {
   from {
     -webkit-transform: perspective(400px);
@@ -1121,7 +1156,6 @@ body {
 #task-list {
   height: 40vh;
   margin-left: 6rem;
-  margin-top: 3rem;
   margin-right: 6rem;
   margin-bottom: 0;
   display: -webkit-box;

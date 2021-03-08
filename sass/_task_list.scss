@@ -23,13 +23,12 @@
 	animation-name: task-exit;
 	-webkit-backface-visibility: visible !important;
 	backface-visibility: visible !important;
-	animation-fill-mode: forwards;
+	animation-fill-mode: forwards; 
 }
 
 #task-list {
 	height: 40vh;
 	margin-left: 6rem;
-	margin-top: 3rem;
 	margin-right: 6rem;
 	margin-bottom: 0;
 	display: flex;
@@ -102,3 +101,4 @@ $list-sizes: (
 		font-size: #{$size};
 	}
 }
+

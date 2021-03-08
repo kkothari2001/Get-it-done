@@ -30,7 +30,6 @@
 
 		<div class="loader" id="preloader">
 			<article id="headers" class="black">
-				<!-- <h2 class="start-title">GET IT DONE!</h2> -->
 			<div class="loader-inner">
 				<span id="block-1" class="block"></span>
 				<span id="block-2" class="block"></span>
@@ -119,7 +118,11 @@
 				<label>Press enter to create task!</label>
 				<input type="text" id="text-input-details" class="black" placeholder="Details">
 			</article>
-
+			<div id="priority-container">
+				<img class="priority" onclick="activate(this);" id="priority-low" src="./images/inactive-1.png" alt="">
+				<img class="priority" onclick="activate(this);" id="priority-mid" src="./images/inactive-1.png" alt="">
+				<img class="priority" onclick="activate(this);" id="priority-high" src="./images/inactive-1.png" alt="">
+			</div>
 			<!-- <ul id="task-list" class="bold">
 				<li>Kem cho</li>
 				<li>Kem cho</li>

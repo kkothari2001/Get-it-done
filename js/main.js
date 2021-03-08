@@ -4,7 +4,7 @@ const totalTasks = document.getElementById("total");
 const completedTasks = document.getElementById("completed");
 const modal = document.getElementById("modal");
 const maxRecentlyDeleted = 4;
-const hamburger = document.querySelector('.hamburger');
+const hamburger = document.querySelector(".hamburger");
 const menu = document.querySelector('#menu');
 
 loadData("TotalTasks") || saveData("TotalTasks", 0);
@@ -50,7 +50,7 @@ function onLoad() {
 
 function deleteTaskOnClick(elem) {
 	let id = Number(elem.dataset.id);
-
+	
 	let task = readOneTask(taskStore, id, function(task) {
 		let completedTask = new CompletedTask(task.title, task.detail);
 		addTask(completedTaskStore, completedTask, function() {
@@ -72,12 +72,15 @@ function deleteTaskOnClick(elem) {
 	});
 }
 
-input.addEventListener("keydown", function(e) {
+function onEnter(i,e){
 	if (e.keyCode === 13) {
 		let task = new Task(input.value, inputDetail.value);
 		input.value = "";
-		inputDetail.value = "";
+		if(i==0)
+			inputDetail.value = "";
 		if (task.title.length === 0) {
+			if(i==1)
+				alert("Enter Task Title");
 			return;
 		}
 		addTask(taskStore, task, function() {
@@ -85,26 +88,18 @@ input.addEventListener("keydown", function(e) {
 			saveData("TotalTasks", amountOfTasks);
 			totalTasks.innerHTML = loadData("TotalTasks");
 			updateTasks();
-		});
-	}
-});
-
-inputDetail.addEventListener("keydown", function(e){
-	if(e.keyCode === 13){		
-		let task = new Task(input.value, inputDetail.value);
-		input.value = "";
-		if (task.title.length === 0) {
-			alert("Enter Task Title");
-			return;
-		}
-		addTask(taskStore, task, function() {
-			let amountOfTasks = Number(loadData("TotalTasks")) + 1;
-			saveData("TotalTasks", amountOfTasks);
-			totalTasks.innerHTML = loadData("TotalTasks");
-			updateTasks();
+			if(i==1)
 			inputDetail.value = "";
 		});
 	}
+}
+
+input.addEventListener("keydown", function(e) {
+	onEnter(0,e);
+});
+
+inputDetail.addEventListener("keydown", function(e){
+	onEnter(1,e);
 });
 
 function updateTheme(theme) {
@@ -158,6 +153,17 @@ function reset() {
 	deleteAllTasks(completedTaskStore);
 	updateTasks();
 }
+
+//Code for priority 
+
+function activate(element){
+	element.classList.toggle("activate");
+	element.setAttribute("src", "./images/active-1.png");
+	if(!element.classList.contains("activate")){
+		element.setAttribute("src", "./images/inactive-1.png");
+	}
+}
+
 
 /**
  * JQuery for fadeOut() i.e. for preloader's animation

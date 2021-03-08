@@ -64,6 +64,34 @@
 			font-size: 1.6rem;
 			bottom: 2.3rem;
 		}
+	}
 
+}
+
+#priority-container{
+	display: inline-block;
+	position: relative;
+	color: rgba($color: var(--text-color), $alpha: 1);
+	left: 50%-2.5%;
+	transform: translateY(-50%);
+	.priority{
+		padding: .5em;
+		height: 36px;
+		width: 9px;
+		cursor: pointer;
+		opacity: 0.5;
+		
+		@media(max-width: 1100px){
+			height: 24px;
+			width: 6px;
+		}
+		
+		@media(max-width: 500px){
+			height: 16px;
+			width: 4px;
+		}
+	}
+	.activate{
+		opacity: 1;
 	}
 }
