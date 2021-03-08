@@ -1,0 +1,114 @@
+
+.hamburger{
+    position: relative;
+    left: 33px;
+    height: 60px;
+    z-index:100; 
+    width: 60px;
+    display: inline-block;
+    border: 3px solid;
+    border-color: rgba($color: var(--text-color), $alpha: 1.0);
+    border-radius: 50%;
+    z-index: 100;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    cursor: pointer;
+    transform: scale(.8);
+    margin-right: 20px;
+
+    &::after{
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 100%;
+        border: 3px solid;
+        border-color: rgba($color: var(--text-color), $alpha: 1.0);
+        border-radius: 50%;
+        animation: hamburgerPulse 1s ease infinite;
+    
+    }
+    
+    .bar{
+        height: 5.5px;
+        border-radius: 10px;
+        width: 40px;
+        position: relative;
+        background-color: rgba($color: var(--text-color), $alpha: 1.0);;
+        z-index: -1;
+
+        &::after,
+        &::before{
+            content: '';
+            border-radius: 10px;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            background-color: rgba($color: var(--text-color), $alpha: 1.0);
+            transition: .4s ease;
+            transition-property: top, bottom;
+        }
+
+        &::after{
+            top: 11px;
+        }
+        &::before{
+            bottom: 11px;
+        }
+    }
+
+    @media (max-width: 1100px) {
+        margin: auto;
+        display: flex;
+        left: 0;
+    }
+    
+    @media (max-width: 500px) {
+        margin: auto;
+        display: flex;
+        left: 0;
+    }
+
+    @keyframes hamburgerPulse{
+        0%{
+            opacity: 1;
+            transform: scale(1);
+        }100%{
+            opacity: 0;
+            transform: scale(1.5);
+        }
+    }
+}
+
+.hamburger.active{
+    .bar{
+        &::before{
+            bottom: 0;
+        }
+        &::after{
+            top: 0;
+        }
+    }
+} 
+
+.spare{
+    @media (max-width: 1100px) {
+        top: 10px;
+    }
+    
+    @media (max-width: 500px) {
+        top: 10px;
+    }
+}
+
+h4{
+    @media (max-width: 1100px) {
+        padding-top: 1.5em;
+    }
+    
+    @media (max-width: 500px) {
+        padding-top: 1.5em;
+    }
+}
