@@ -39,14 +39,6 @@
 	user-select: none;
 	font-size: 16px;
 
-	li {
-		list-style: none;
-		font-size: 4.5em;
-		margin: 0.34em 0;
-		margin-right: 2em;
-		color: rgba($color: var(--text-color), $alpha: 1);
-	}
-
 	@media (max-width: 1500px) {
 		font-size: 10px;
 	}
@@ -65,48 +57,48 @@
 		height: auto;
 		align-items: center;
 		margin: 3rem 0 12rem;
-
-		li {
-			margin: 1rem 0;
-			font-size: 4rem;
-		}
 	}
-
-	$list-sizes: (
-		"3": 3.2em,
-		"5": 2.8em,
-		"9": 2.5em,
-		"12": 2em,
-		"20": 1.8em,
-		"25": 1.6em,
-		"30": 1.2em
-	);
-
-	@each $min, $size in $list-sizes {
-		li:first-child:nth-last-child(n + #{$min}),
-		li:first-child:nth-last-child(n + #{$min}) ~ li {
-			font-size: #{$size};
-		}
+	li{
+		list-style: none;
 	}
-
 	div{
+		//from headers
 		@include cardStyle;
 		color: rgba($color: var(--text-color), $alpha: 1);
 		box-sizing: border-box;
 		padding: 1rem 1rem;
-		max-width: 40%;
+		min-width: 40%;
 		height: fit-content;
 		margin-bottom: 2em;
+		cursor: pointer;
 
 		h2{
 			font-weight: 700;
 			text-transform: uppercase;
-			font-size: 1.5rem;
-			cursor: pointer;
+			// font-size: 1.8rem;
 		}
 		p{
-			font-size: 1rem;
+			// font-size: 1.3rem;
 			text-transform: capitalize;
 		}
+	}
+}
+
+$list-sizes: (
+		"1" :2em,
+		"2": 2em,
+		"3": 2em,
+		"5": 1.8em,
+		"9": 1.6em,
+		"12": 1.4em,
+		"20": 1.2em,
+		"25": 1em,
+		"30": 0.8em
+);
+
+@each $min, $size in $list-sizes {
+	li:first-child:nth-last-child(n + #{$min}),
+	li:first-child:nth-last-child(n + #{$min}) ~ li {
+		font-size: #{$size};
 	}
 }

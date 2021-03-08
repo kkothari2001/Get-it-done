@@ -11,6 +11,16 @@
     z-index: 9999;
     background-image: linear-gradient(rgba($color: var(--gradient-1), $alpha: 1), rgba($color: var(--gradient-2), $alpha: 1));
 
+    // .start-title{
+    //     position: absolute;
+    //     top: 37%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     font-weight: 900;
+    //     color: rgb(255, 255, 255);
+    //     font-size: 3em;
+    // }
+
     .loader-inner{
     /*    background: #CCC;*/
         position: absolute;

@@ -4,6 +4,8 @@ const totalTasks = document.getElementById("total");
 const completedTasks = document.getElementById("completed");
 const modal = document.getElementById("modal");
 const maxRecentlyDeleted = 4;
+const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('#menu');
 
 loadData("TotalTasks") || saveData("TotalTasks", 0);
 loadData("CompletedTasks") || saveData("CompletedTasks", 0);
@@ -18,14 +20,15 @@ function updateTasks() {
 		let innerHTML = "";
 		for (let i = 0; i < tasks.length; i++) {
 			innerHTML += `
-	        <div>
-	        <h2 data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>${tasks[i].title}</h2>
+	        <li><div data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
+	        <h2>${tasks[i].title}</h2>
 			<p>${tasks[i].detail}</p>
-	        </div>
+	        </div></li>
 	        `;
 		}
 		list.innerHTML = innerHTML;
 	});
+	
 	readTasks(completedTaskStore, function(tasks) {
 		let list = document.getElementById("completed-task-list");
 		let innerHTML = "";
@@ -51,7 +54,7 @@ function deleteTaskOnClick(elem) {
 	let task = readOneTask(taskStore, id, function(task) {
 		let completedTask = new CompletedTask(task.title, task.detail);
 		addTask(completedTaskStore, completedTask, function() {
-			elem.parentNode.classList.add("exit");
+			elem.classList.add("exit");
 
 			elem.addEventListener("animationend", function() {
 				deleteTask(taskStore, id, function() {
@@ -90,8 +93,8 @@ inputDetail.addEventListener("keydown", function(e){
 	if(e.keyCode === 13){		
 		let task = new Task(input.value, inputDetail.value);
 		input.value = "";
-		inputDetail.value = "";
 		if (task.title.length === 0) {
+			alert("Enter Task Title");
 			return;
 		}
 		addTask(taskStore, task, function() {
@@ -99,6 +102,7 @@ inputDetail.addEventListener("keydown", function(e){
 			saveData("TotalTasks", amountOfTasks);
 			totalTasks.innerHTML = loadData("TotalTasks");
 			updateTasks();
+			inputDetail.value = "";
 		});
 	}
 });
@@ -166,9 +170,6 @@ function reset() {
  * Modified Code for menu i.e. hamburger 
  */
 
-const hamburger = document.querySelector('.hamburger');
-const menu = document.querySelector('#menu');
-console.log(hamburger);
 hamburger.addEventListener('click', ()=>{
    hamburger.classList.toggle("active");
    document.querySelector(".spare").classList.toggle("active");

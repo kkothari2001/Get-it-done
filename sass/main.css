@@ -221,6 +221,187 @@ body {
   padding-left: .5em;
 }
 
+@-webkit-keyframes animate {
+  0% {
+    -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-800px) rotate(360deg);
+            transform: translateY(-800px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes animate {
+  0% {
+    -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-800px) rotate(360deg);
+            transform: translateY(-800px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.bg-animation {
+  overflow: auto;
+}
+
+.box-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -999;
+}
+
+.box-area li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 25px;
+  height: 25px;
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(var(--gradient-1), 1)), to(rgba(var(--gradient-2), 1)));
+  background-image: linear-gradient(to left, rgba(var(--gradient-1), 1), rgba(var(--gradient-2), 1));
+  -webkit-animation: animate 20s linear infinite;
+          animation: animate 20s linear infinite;
+  bottom: -150px;
+}
+
+.box-area li:nth-child(1) {
+  left: 86%;
+  width: 80px;
+  height: 80px;
+  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
+.box-area li:nth-child(2) {
+  left: 12%;
+  width: 30px;
+  height: 30px;
+  -webkit-clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+          clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
+}
+
+.box-area li:nth-child(3) {
+  left: 70%;
+  width: 100px;
+  height: 100px;
+  -webkit-clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  -webkit-animation-delay: 5.5s;
+          animation-delay: 5.5s;
+}
+
+.box-area li:nth-child(4) {
+  left: 42%;
+  width: 150px;
+  height: 150px;
+  -webkit-clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+          clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-duration: 15s;
+          animation-duration: 15s;
+}
+
+.box-area li:nth-child(5) {
+  left: 65%;
+  width: 50px;
+  height: 50px;
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
+.box-area li:nth-child(6) {
+  left: 15%;
+  width: 110px;
+  height: 110px;
+  -webkit-clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+          clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  -webkit-animation-delay: 3.5s;
+          animation-delay: 3.5s;
+}
+
+.box-area li:nth-child(7) {
+  left: 96%;
+  width: 80px;
+  height: 80px;
+  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+  -webkit-animation-delay: 25s;
+          animation-delay: 25s;
+}
+
+.box-area li:nth-child(8) {
+  left: 40%;
+  width: 30px;
+  height: 30px;
+  -webkit-clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+          clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+  -webkit-animation-duration: 15s;
+          animation-duration: 15s;
+}
+
+.box-area li:nth-child(9) {
+  left: 70%;
+  width: 100px;
+  height: 100px;
+  -webkit-clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  -webkit-animation-delay: 25.5s;
+          animation-delay: 25.5s;
+}
+
+.box-area li:nth-child(10) {
+  left: 22%;
+  width: 90px;
+  height: 0px;
+  -webkit-clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+          clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-duration: 20s;
+          animation-duration: 20s;
+}
+
+.box-area li:nth-child(11) {
+  left: 75%;
+  width: 20px;
+  height: 20px;
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
+.box-area li:nth-child(12) {
+  left: 15%;
+  width: 50px;
+  height: 50px;
+  -webkit-clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+          clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  -webkit-animation-delay: 5.5s;
+          animation-delay: 5.5s;
+}
+
 .loader {
   width: 100%;
   height: 100%;
@@ -471,8 +652,6 @@ body {
   width: calc(4.5vw + 70px);
   min-height: 100vh;
   height: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
   -ms-flex-negative: 0;
       flex-shrink: 0;
   padding-top: 40px;
@@ -927,14 +1106,6 @@ body {
   font-size: 16px;
 }
 
-#task-list li {
-  list-style: none;
-  font-size: 4.5em;
-  margin: 0.34em 0;
-  margin-right: 2em;
-  color: rgba(var(--text-color), 1);
-}
-
 @media (max-width: 1500px) {
   #task-list {
     font-size: 10px;
@@ -970,45 +1141,10 @@ body {
             align-items: center;
     margin: 3rem 0 12rem;
   }
-  #task-list li {
-    margin: 1rem 0;
-    font-size: 4rem;
-  }
 }
 
-#task-list li:first-child:nth-last-child(n + 3),
-#task-list li:first-child:nth-last-child(n + 3) ~ li {
-  font-size: 3.2em;
-}
-
-#task-list li:first-child:nth-last-child(n + 5),
-#task-list li:first-child:nth-last-child(n + 5) ~ li {
-  font-size: 2.8em;
-}
-
-#task-list li:first-child:nth-last-child(n + 9),
-#task-list li:first-child:nth-last-child(n + 9) ~ li {
-  font-size: 2.5em;
-}
-
-#task-list li:first-child:nth-last-child(n + 12),
-#task-list li:first-child:nth-last-child(n + 12) ~ li {
-  font-size: 2em;
-}
-
-#task-list li:first-child:nth-last-child(n + 20),
-#task-list li:first-child:nth-last-child(n + 20) ~ li {
-  font-size: 1.8em;
-}
-
-#task-list li:first-child:nth-last-child(n + 25),
-#task-list li:first-child:nth-last-child(n + 25) ~ li {
-  font-size: 1.6em;
-}
-
-#task-list li:first-child:nth-last-child(n + 30),
-#task-list li:first-child:nth-last-child(n + 30) ~ li {
-  font-size: 1.2em;
+#task-list li {
+  list-style: none;
 }
 
 #task-list div {
@@ -1025,11 +1161,12 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 1rem 1rem;
-  max-width: 40%;
+  min-width: 40%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   margin-bottom: 2em;
+  cursor: pointer;
 }
 
 #task-list div:hover {
@@ -1040,13 +1177,55 @@ body {
 #task-list div h2 {
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 1.5rem;
-  cursor: pointer;
 }
 
 #task-list div p {
-  font-size: 1rem;
   text-transform: capitalize;
+}
+
+li:first-child:nth-last-child(n + 1),
+li:first-child:nth-last-child(n + 1) ~ li {
+  font-size: 2em;
+}
+
+li:first-child:nth-last-child(n + 2),
+li:first-child:nth-last-child(n + 2) ~ li {
+  font-size: 2em;
+}
+
+li:first-child:nth-last-child(n + 3),
+li:first-child:nth-last-child(n + 3) ~ li {
+  font-size: 2em;
+}
+
+li:first-child:nth-last-child(n + 5),
+li:first-child:nth-last-child(n + 5) ~ li {
+  font-size: 1.8em;
+}
+
+li:first-child:nth-last-child(n + 9),
+li:first-child:nth-last-child(n + 9) ~ li {
+  font-size: 1.6em;
+}
+
+li:first-child:nth-last-child(n + 12),
+li:first-child:nth-last-child(n + 12) ~ li {
+  font-size: 1.4em;
+}
+
+li:first-child:nth-last-child(n + 20),
+li:first-child:nth-last-child(n + 20) ~ li {
+  font-size: 1.2em;
+}
+
+li:first-child:nth-last-child(n + 25),
+li:first-child:nth-last-child(n + 25) ~ li {
+  font-size: 1em;
+}
+
+li:first-child:nth-last-child(n + 30),
+li:first-child:nth-last-child(n + 30) ~ li {
+  font-size: 0.8em;
 }
 
 @-webkit-keyframes flipInX {
