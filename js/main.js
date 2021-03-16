@@ -1,8 +1,11 @@
 const input = document.getElementById("task-input");
+const inputDetail = document.getElementById("text-input-details");
 const totalTasks = document.getElementById("total");
 const completedTasks = document.getElementById("completed");
 const modal = document.getElementById("modal");
 const maxRecentlyDeleted = 4;
+const hamburger = document.querySelector(".hamburger");
+const menu = document.querySelector('#menu');
 
 loadData("TotalTasks") || saveData("TotalTasks", 0);
 loadData("CompletedTasks") || saveData("CompletedTasks", 0);
@@ -17,19 +20,21 @@ function updateTasks() {
 		let innerHTML = "";
 		for (let i = 0; i < tasks.length; i++) {
 			innerHTML += `
-	        <li data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this);'>
-	        ${tasks[i].title}
-	        </li>
+	        <li><div data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
+	        <h2>${tasks[i].title}</h2>
+			<p>${tasks[i].detail}</p>
+	        </div></li>
 	        `;
 		}
 		list.innerHTML = innerHTML;
 	});
+	
 	readTasks(completedTaskStore, function(tasks) {
 		let list = document.getElementById("completed-task-list");
 		let innerHTML = "";
 		tasks.reverse();
 		for (let i = 0; i < Math.min(tasks.length, maxRecentlyDeleted); i++) {
-			innerHTML += `<li class="invert">${tasks[i].title}: <span>${tasks[i].completedDate}</span></li>`;
+			innerHTML += `<li class="invert">${tasks[i].title} : <span>${tasks[i].completedDate}</span></li>`;
 		}
 		list.innerHTML = innerHTML;
 	});
@@ -45,11 +50,12 @@ function onLoad() {
 
 function deleteTaskOnClick(elem) {
 	let id = Number(elem.dataset.id);
-
+	
 	let task = readOneTask(taskStore, id, function(task) {
-		let completedTask = new CompletedTask(task.title);
+		let completedTask = new CompletedTask(task.title, task.detail);
 		addTask(completedTaskStore, completedTask, function() {
 			elem.classList.add("exit");
+
 			elem.addEventListener("animationend", function() {
 				deleteTask(taskStore, id, function() {
 					let amountOfTasks = Number(loadData("TotalTasks")) - 1;
@@ -66,11 +72,15 @@ function deleteTaskOnClick(elem) {
 	});
 }
 
-input.addEventListener("keydown", function(e) {
+function onEnter(i,e){
 	if (e.keyCode === 13) {
-		let task = new Task(input.value);
+		let task = new Task(input.value, inputDetail.value);
 		input.value = "";
+		if(i==0)
+			inputDetail.value = "";
 		if (task.title.length === 0) {
+			if(i==1)
+				alert("Enter Task Title");
 			return;
 		}
 		addTask(taskStore, task, function() {
@@ -78,8 +88,18 @@ input.addEventListener("keydown", function(e) {
 			saveData("TotalTasks", amountOfTasks);
 			totalTasks.innerHTML = loadData("TotalTasks");
 			updateTasks();
+			if(i==1)
+			inputDetail.value = "";
 		});
 	}
+}
+
+input.addEventListener("keydown", function(e) {
+	onEnter(0,e);
+});
+
+inputDetail.addEventListener("keydown", function(e){
+	onEnter(1,e);
 });
 
 function updateTheme(theme) {
@@ -133,3 +153,36 @@ function reset() {
 	deleteAllTasks(completedTaskStore);
 	updateTasks();
 }
+
+//Code for priority 
+
+function activate(element){
+	element.classList.toggle("activate");
+	element.setAttribute("src", "./images/active-1.png");
+	if(!element.classList.contains("activate")){
+		element.setAttribute("src", "./images/inactive-1.png");
+	}
+}
+
+
+/**
+ * JQuery for fadeOut() i.e. for preloader's animation
+ */
+ $(window).on('load', function () {
+    $("#preloader").delay(3000).fadeOut('slow');
+});
+
+/**
+ * Modified Code for menu i.e. hamburger 
+ */
+
+hamburger.addEventListener('click', ()=>{
+   hamburger.classList.toggle("active");
+   document.querySelector(".spare").classList.toggle("active");
+   menu.classList.toggle("active");
+});
+document.querySelector(".spare").addEventListener('click', ()=>{
+	document.querySelector(".spare").classList.toggle("active");
+	menu.classList.toggle("active");
+	hamburger.classList.toggle("active");
+});

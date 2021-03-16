@@ -4,17 +4,57 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Get it done!</title>
-		<link rel="stylesheet" href="stylesheets/main.css" />
+		<link rel="stylesheet" href="sass/main.css" />
 		<link
 			href="https://fonts.googleapis.com/css?family=Montserrat:500,700,900&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
 	<body>
+		<div class="bg-animation">
+			<ul class="box-area">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+
+		<div class="loader" id="preloader">
+			<article id="headers" class="black">
+			<div class="loader-inner">
+				<span id="block-1" class="block"></span>
+				<span id="block-2" class="block"></span>
+				<span id="block-3" class="block"></span>
+				<span id="block-4" class="block"></span>
+				<span id="block-5" class="block"></span>
+				<span id="block-6" class="block"></span>
+				<span id="block-7" class="block"></span>
+				<span id="block-8" class="block"></span>
+				<span id="block-9" class="block"></span>
+				<span id="block-10" class="block"></span>
+				<span id="block-11" class="block"></span>
+				<span id="block-12" class="block"></span>
+				<span id="block-13" class="block"></span>
+				<span id="block-14" class="block"></span>
+				<span id="block-15" class="block"></span>
+				<span id="block-16" class="block"></span>
+			</div>
+		</div>
+
 		<div id="menu-section">
 			<input type="checkbox" id="menu" />
 			<aside id="menu-controller">
-				<label for="menu" class="icon"></label>
+				<!-- <label for="menu" class="icon"></label> -->
+				<div class="hamburger"><div class="bar"></div></div>
 			</aside>
 
 			<div id="menu-dimmed-bg"></div>
@@ -22,7 +62,8 @@
 			<div id="menu-content">
 				<header>
 					<h4 class="bold">Get it done!</h4>
-					<label for="menu" class="icon"></label>
+					<!-- <label for="menu" class="icon"></label> -->
+					<div class="hamburger spare"><div class="bar"></div></div>
 				</header>
 				<section id="theme">
 					<h5 class="bold">
@@ -75,14 +116,22 @@
 					placeholder="Create Task"
 				/>
 				<label>Press enter to create task!</label>
+				<input type="text" id="text-input-details" class="black" placeholder="Details">
 			</article>
-
-			<ul id="task-list" class="bold">
+			<div id="priority-container">
+				<img class="priority" onclick="activate(this);" id="priority-low" src="./images/inactive-1.png" alt="">
+				<img class="priority" onclick="activate(this);" id="priority-mid" src="./images/inactive-1.png" alt="">
+				<img class="priority" onclick="activate(this);" id="priority-high" src="./images/inactive-1.png" alt="">
+			</div>
+			<!-- <ul id="task-list" class="bold">
 				<li>Kem cho</li>
 				<li>Kem cho</li>
 				<li>Kem cho</li>
 				<li>Kem cho</li>
 				<li>Kem cho</li>
+			</ul> -->
+			<ul id="task-list">
+				<li><div class="notice"></div></li>
 			</ul>
 		</section>
 		<dialog id="modal">
@@ -93,6 +142,7 @@
 			<button class="black" onclick="reset(); closeModal();">Yes</button>
 			<button class="black" onclick="closeModal();">No</button>
 		</dialog>
+		<script src="js/jquery.min.js"></script>
 		<script src="js/date_format.js"></script>
 		<script src="js/storage.js"></script>
 		<script src="js/tasks.js"></script>
