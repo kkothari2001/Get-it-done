@@ -6,6 +6,7 @@ const modal = document.getElementById("modal");
 const maxRecentlyDeleted = 4;
 const hamburger = document.querySelector(".hamburger");
 const menu = document.querySelector('#menu');
+let priority = 0;
 
 loadData("TotalTasks") || saveData("TotalTasks", 0);
 loadData("CompletedTasks") || saveData("CompletedTasks", 0);
@@ -13,7 +14,6 @@ loadData("ToDoTheme") || saveData("ToDoTheme", "light");
 
 totalTasks.innerHTML = loadData("TotalTasks");
 completedTasks.innerHTML = loadData("CompletedTasks");
-
 function updateTasks() {
 	readTasks(taskStore, function(tasks) {
 		let list = document.getElementById("task-list");
@@ -48,6 +48,7 @@ function onLoad() {
 	// saveData("TotalTasks", 0);
 }
 
+let countDeletedTasks = 0;
 function deleteTaskOnClick(elem) {
 	let id = Number(elem.dataset.id);
 	
@@ -70,11 +71,17 @@ function deleteTaskOnClick(elem) {
 			});
 		});
 	});
+	// countDeletedTasks++;
+	// if(countDeletedTasks == 5){
+	// 	decHeight()
+	// 	countDeletedTasks = 0;
+	// }
 }
 
+let count = 0;
 function onEnter(i,e){
 	if (e.keyCode === 13) {
-		let task = new Task(input.value, inputDetail.value);
+		let task = new Task(input.value, inputDetail.value+priority);
 		input.value = "";
 		if(i==0)
 			inputDetail.value = "";
@@ -90,7 +97,16 @@ function onEnter(i,e){
 			updateTasks();
 			if(i==1)
 			inputDetail.value = "";
+			// count++;
+			// console.log("count is ",count)
+			// if(count == 5){	
+			// 	incHeight();
+			// 	count = 0;
+			// }
 		});
+		priorityLow = document.getElementById("priority-low");
+		priorityMid = document.getElementById("priority-mid");
+		priorityHigh = document.getElementById("priority-high");
 	}
 }
 
@@ -150,7 +166,6 @@ function reset() {
 }
 
 //Code for priority 
-
 function activate(element){
 	element.classList.toggle("activate");
 	element.setAttribute("src", "./images/active-1.png");
@@ -159,6 +174,69 @@ function activate(element){
 	}
 }
 
+$(".priority").click(function() {
+    // Get the previous element IF it's a UL (nothing otherwise)
+    var previous = $(this).prev("img");
+	if(previous[0] == undefined){
+		activate(this);
+		midElement = $(this).next("img");
+		lastElement = midElement.next("img");
+		if(!this.classList.contains("activate")){
+			if(midElement[0].classList.contains("activate")){
+				activate(midElement[0]);
+				activate(this);
+			}
+			if(lastElement[0].classList.contains("activate")){
+				activate(lastElement[0]);
+				activate(this);
+			}
+		}
+		if(this.classList.contains("activate") && !midElement[0].classList.contains("activate") && !lastElement[0].classList.contains("activate")){
+			priority = 1;
+		}
+		if(!this.classList.contains("activate") && !midElement[0].classList.contains("activate") && !lastElement[0].classList.contains("activate")){
+			priority = 0;
+		}
+	}
+	else if(previous[0].id == "priority-low"){
+		firstElement = $(this).prev("img");
+		lastElement = $(this).next("img");
+		if(firstElement[0].classList.contains("activate")){
+			activate(this);
+		}
+		if(!this.classList.contains("activate")){
+			if(lastElement[0].classList.contains("activate")){
+				activate(lastElement[0])
+				activate(this);
+			}
+		}
+		if(!firstElement[0].classList.contains("activate") && !lastElement[0].classList.contains("activate")){
+			activate(this);
+			activate(firstElement[0]);
+
+		}
+		if(this.classList.contains("activate") && !lastElement[0].classList.contains("activate")){
+			priority = 2;
+		}
+	}
+	else if(previous[0].id == "priority-mid"){
+		midElement = $(this).prev("img");
+		firstElement = midElement.prev("img");
+		if(firstElement[0].classList.contains("activate") && midElement[0].classList.contains("activate")){
+			activate(this);
+		}
+		if(firstElement[0].classList.contains("activate") && !midElement[0].classList.contains("activate")){
+			activate(this);
+			activate(midElement[0]);
+		}
+		if(!midElement[0].classList.contains("activate") && !firstElement[0].classList.contains("activate")){
+			activate(this);
+			activate(firstElement[0]);
+			activate(midElement[0]);
+		}
+		priority = 3;
+	}
+});
 
 /**
  * JQuery for fadeOut() i.e. for preloader's animation
@@ -181,3 +259,18 @@ document.querySelector(".spare").addEventListener('click', ()=>{
 	menu.classList.toggle("active");
 	hamburger.classList.toggle("active");
 });
+
+function incHeight() {
+    var el = document.getElementById("menu-controller");
+    var height = el.offsetHeight;
+	console.log(height);
+    var newHeight = height + 100;
+    el.style.height = newHeight + 'px';
+}
+
+function decHeight() {
+    var el = document.getElementById("menu-controller");
+    var height = el.offsetHeight;
+    var newHeight = height - 100;
+    el.style.height = newHeight + 'px';
+}

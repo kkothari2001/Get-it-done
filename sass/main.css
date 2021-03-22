@@ -157,7 +157,6 @@ body {
   margin: 0;
   cursor: default;
   display: none;
-  min-height: 100vh;
 }
 
 @media (max-width: 1100px) {
@@ -232,7 +231,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -849,8 +848,9 @@ body {
             align-items: center;
     width: 100%;
     min-height: auto;
-    padding-top: 0;
+    height: 100vh;
     height: 100px;
+    padding-top: 0;
   }
   #menu-controller label {
     width: 100px;
@@ -1081,6 +1081,7 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   top: 2em;
+  margin-bottom: 2em;
 }
 
 #priority-container .priority {
