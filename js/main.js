@@ -127,13 +127,8 @@ function updateTheme(theme) {
 	let activeClass = theme == "light" ? "light" : "dark";
 	document.getElementById(activeClass).classList.add("current-theme");
 
-	saveData("ToDoTheme", theme);
+	saveData("ToDoTheme", theme); //saving the theme so that it is reatins the next time user visits
 
-	let invertStrength = theme == "light" ? "0%" : "100%";
-	let icons = document.getElementsByClassName("icon");
-	for (let i = 0; i < icons.length; i++) {
-		icons[i].style.filter = `brightness(100%) invert(${invertStrength})`;
-	}
 }
 
 function attemptReset() {
