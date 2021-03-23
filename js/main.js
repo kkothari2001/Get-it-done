@@ -23,8 +23,16 @@ function updateTasks() {
 	        <li><div data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
 	        <h2>${tasks[i].title}</h2>
 			<p>${tasks[i].detail}</p>
-	        </div></li>
 	        `;
+			if(tasks[i].priority == 1){
+				innerHTML += `<img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"></div></li>`;
+			}else if(tasks[i].priority == 2){
+				innerHTML += `<img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"></div></li>`;
+			}else if(tasks[i].priority == 3){
+				innerHTML += `<img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"></div></li>`;
+			}else{
+				innerHTML += `</div></li>`
+			}
 		}
 		list.innerHTML = innerHTML;
 	});
@@ -53,7 +61,7 @@ function deleteTaskOnClick(elem) {
 	let id = Number(elem.dataset.id);
 	
 	let task = readOneTask(taskStore, id, function(task) {
-		let completedTask = new CompletedTask(task.title, task.detail);
+		let completedTask = new CompletedTask(task.title, task.detail, task.priority);
 		addTask(completedTaskStore, completedTask, function() {
 			elem.classList.add("exit");
 
@@ -81,7 +89,8 @@ function deleteTaskOnClick(elem) {
 let count = 0;
 function onEnter(i,e){
 	if (e.keyCode === 13) {
-		let task = new Task(input.value, inputDetail.value+priority);
+		let task = new Task(input.value, inputDetail.value, priority);
+		console.log(task);
 		input.value = "";
 		if(i==0)
 			inputDetail.value = "";
@@ -107,6 +116,18 @@ function onEnter(i,e){
 		priorityLow = document.getElementById("priority-low");
 		priorityMid = document.getElementById("priority-mid");
 		priorityHigh = document.getElementById("priority-high");
+		if(priorityLow.classList.contains("activate")){
+			activate(priorityLow);
+		}
+		if(priorityMid.classList.contains("activate")){
+			activate(priorityMid);
+		}
+		if(priorityHigh.classList.contains("activate")){
+			activate(priorityHigh);
+		}
+		if(!priorityLow.classList.contains("activate") && !priorityMid.classList.contains("activate") && !priorityHigh.classList.contains("activate")){
+			priority = 0;
+		}
 	}
 }
 
@@ -188,7 +209,6 @@ $(".priority").click(function() {
 			}
 			if(lastElement[0].classList.contains("activate")){
 				activate(lastElement[0]);
-				activate(this);
 			}
 		}
 		if(this.classList.contains("activate") && !midElement[0].classList.contains("activate") && !lastElement[0].classList.contains("activate")){
@@ -217,6 +237,9 @@ $(".priority").click(function() {
 		}
 		if(this.classList.contains("activate") && !lastElement[0].classList.contains("activate")){
 			priority = 2;
+		}
+		if(!this.classList.contains("activate") && !firstElement[0].classList.contains("activate") && !lastElement[0].classList.contains("activate")){
+			priority = 0;
 		}
 	}
 	else if(previous[0].id == "priority-mid"){

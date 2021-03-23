@@ -65,8 +65,9 @@
 		@include cardStyle;
 		color: rgba($color: var(--text-color), $alpha: 1);
 		box-sizing: border-box;
-		padding: 1rem 1rem;
+		padding: 1rem;
 		min-width: 40%;
+		min-width: 10rem;
 		height: fit-content;
 		margin-bottom: 2em;
 		cursor: pointer;
@@ -79,6 +80,10 @@
 		p{
 			// font-size: 1.3rem;
 			text-transform: capitalize;
+		}
+		#priority-property{
+			margin: 0;
+			padding: 0.1em;
 		}
 	}
 }

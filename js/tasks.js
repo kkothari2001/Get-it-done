@@ -2,14 +2,16 @@ let database;
 const taskStore = "Tasks";
 const completedTaskStore = "Completed";
 
-function Task(title, detail) {
+function Task(title, detail, priority) {
 	this.title = title;
 	this.detail = detail;
+	this.priority = priority;
 }
 
-function CompletedTask(title, detail) {
+function CompletedTask(title, detail, priority) {
 	this.title = title;
 	this.detail = detail;
+	this.priority = priority;
 	this.completedDate = getCurrentDate();
 }
 
