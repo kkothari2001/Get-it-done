@@ -1081,7 +1081,7 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   top: 2em;
-  margin-top: 2em;
+  margin-top: 4em;
 }
 
 #priority-container .priority {
@@ -1201,13 +1201,15 @@ body {
 @media (max-width: 1100px) {
   #task-list {
     font-size: 6px;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
     height: auto;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
     margin: 3rem 0 12rem;
+  }
+  #task-list #priority-property {
+    height: 20px !important;
+    width: 5px !important;
   }
 }
 
@@ -1236,6 +1238,8 @@ body {
   height: fit-content;
   margin-bottom: 2em;
   cursor: pointer;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 #task-list div:hover {
@@ -1246,15 +1250,18 @@ body {
 #task-list div h2 {
   font-weight: 700;
   text-transform: uppercase;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
 }
 
 #task-list div p {
+  margin-top: 1rem;
   text-transform: capitalize;
 }
 
 #task-list div #priority-property {
   margin: 0;
-  padding: 0.1em;
+  padding: 0.13em;
 }
 
 li:first-child:nth-last-child(n + 1),
