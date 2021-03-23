@@ -1073,10 +1073,13 @@ body {
   }
 }
 
+span.no-priority {
+  display: inline-block;
+}
+
 #priority-container {
   display: inline-block;
   position: relative;
-  color: rgba(var(--text-color), 1);
   left: 47.5%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);

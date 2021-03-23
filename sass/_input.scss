@@ -66,11 +66,12 @@
 	}
 
 }
-
+span.no-priority{
+	display: inline-block;
+}
 #priority-container{
 	display: inline-block;
 	position: relative;
-	color: rgba($color: var(--text-color), $alpha: 1);
 	// left: 65%-2.5%;
 	left: 50%-2.5%;
 	transform: translateY(-50%);

@@ -7,12 +7,14 @@ const maxRecentlyDeleted = 4;
 const hamburger = document.querySelector(".hamburger");
 const menu = document.querySelector('#menu');
 let priority = 0;
-
+var todo_list = [];
+var priorities = [0, 1, 2, 3];
 loadData("TotalTasks") || saveData("TotalTasks", 0);
 loadData("CompletedTasks") || saveData("CompletedTasks", 0);
 loadData("ToDoTheme") || saveData("ToDoTheme", "light");
 totalTasks.innerHTML = loadData("TotalTasks");
 completedTasks.innerHTML = loadData("CompletedTasks");
+
 function updateTasks() {
 	readTasks(taskStore, function(tasks) {
 		let list = document.getElementById("task-list");
@@ -29,7 +31,7 @@ function updateTasks() {
 			}else if(tasks[i].priority == 3){
 				innerHTML += `<img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="delete-button" style="height: 25px; width: 20px;" src="./images/trash.png" align="right" onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'></div></li>`;
 			}else{
-				innerHTML += `<img class="no-priority" style="height: 24px; width: 6px;" src="./images/blank.png"><img class="delete-button" style="height: 25px; width: 20px;" src="./images/trash.png" align="right" onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'></div></li>`
+				innerHTML += `<span class="no-priority" style="height: 28px; width: 10px;"></span><img class="delete-button" style="height: 25px; width: 20px;" src="./images/trash.png" align="right" onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'></div></li>`
 			}
 		}
 		list.innerHTML = innerHTML;
@@ -44,6 +46,7 @@ function updateTasks() {
 		}
 		list.innerHTML = innerHTML;
 	});
+
 }
 
 function onLoad() {
@@ -52,6 +55,7 @@ function onLoad() {
 	document.body.style.display = "flex";
 	// deleteAllTasks(taskStore);
 	// saveData("TotalTasks", 0);
+	//changing priority icon for dark theme
 }
 
 let countDeletedTasks = 0;
@@ -122,6 +126,17 @@ function onEnter(i,e){
 			// 	incHeight();
 			// 	count = 0;
 			// }
+			todo_list.push(
+				{
+				priorityKey: priority,
+				taskKey: task
+				}
+			);
+			todo_list.sort(function (task1, task2) {
+				return priorities[task1.priority] - priorities[task2.priority];
+			});
+			console.log(todo_list);
+
 		});
 		priorityLow = document.getElementById("priority-low");
 		priorityMid = document.getElementById("priority-mid");
@@ -149,8 +164,20 @@ inputDetail.addEventListener("keydown", function(e){
 	onEnter(1,e);
 });
 
+function sort(){
+	readTasks(taskStore, function(tasks) {
+		let list = document.getElementById("task-list");
+			list.sort(function(a,b){
+				return $(a).priority  - $(b).priority;
+			});
+			tasks.append(tasks);
+			console.log(tasks);
+	});
+}
+
 function updateTheme(theme) {
 	console.log(theme);
+	resetPriorityIcons();
 	let bgColor = theme == "light" ? "255, 255, 255" : "19, 19, 19";
 	let textColor = theme == "light" ? "12, 12, 12" : "255, 255, 255";
 	let shadowColor = theme == "light" ? "0, 0, 0" : "255, 255, 255";
@@ -175,9 +202,37 @@ function updateTheme(theme) {
 	document.getElementById(activeClass).classList.add("current-theme");
 
 	saveData("ToDoTheme", theme); //saving the theme so that it is reatins the next time user visits
-
+	updatePriorityIcons();
 }
 
+function updatePriorityIcons(){
+	//changing the priority icon for dark theme
+	if(document.getElementById("dark").classList.contains("current-theme")){
+		document.getElementById("priority-low").setAttribute("src", "./images/inactive-1-opp.png");
+		document.getElementById("priority-mid").setAttribute("src", "./images/inactive-1-opp.png");
+		document.getElementById("priority-high").setAttribute("src", "./images/inactive-1-opp.png");
+	}else{
+		document.getElementById("priority-low").setAttribute("src", "./images/inactive-1.png");
+		document.getElementById("priority-mid").setAttribute("src", "./images/inactive-1.png");
+		document.getElementById("priority-high").setAttribute("src", "./images/inactive-1.png");
+	}
+}
+
+function resetPriorityIcons(){
+	priorityLow = document.getElementById("priority-low");
+	priorityMid = document.getElementById("priority-mid");
+	priorityHigh = document.getElementById("priority-high");
+	if(priorityLow.classList.contains("activate") && priorityMid.classList.contains("activate") && priorityHigh.classList.contains("activate")){
+		activate(priorityLow);
+		activate(priorityMid);
+		activate(priorityHigh);
+	}else if(priorityLow.classList.contains("activate") && priorityMid.classList.contains("activate") && !priorityHigh.classList.contains("activate")){
+		activate(priorityLow);
+		activate(priorityMid);
+	}else if(priorityLow.classList.contains("activate") && !priorityMid.classList.contains("activate") && !priorityHigh.classList.contains("activate")){
+		activate(priorityLow);
+	}
+}
 function attemptReset() {
 	modal.showModal();
 }
@@ -201,7 +256,11 @@ function activate(element){
 	element.classList.toggle("activate");
 	element.setAttribute("src", "./images/active-1.png");
 	if(!element.classList.contains("activate")){
-		element.setAttribute("src", "./images/inactive-1.png");
+		if(document.getElementById("light").classList.contains("current-theme")){
+			element.setAttribute("src", "./images/inactive-1.png");
+		}else{
+			element.setAttribute("src", "./images/inactive-1-opp.png");
+		}
 	}
 }
 
