@@ -11,7 +11,6 @@ let priority = 0;
 loadData("TotalTasks") || saveData("TotalTasks", 0);
 loadData("CompletedTasks") || saveData("CompletedTasks", 0);
 loadData("ToDoTheme") || saveData("ToDoTheme", "light");
-
 totalTasks.innerHTML = loadData("TotalTasks");
 completedTasks.innerHTML = loadData("CompletedTasks");
 function updateTasks() {
@@ -20,18 +19,17 @@ function updateTasks() {
 		let innerHTML = "";
 		for (let i = 0; i < tasks.length; i++) {
 			innerHTML += `
-	        <li><div data-id='${tasks[i].id}' onclick='deleteTaskOnClick(this); this.onclick=null;'>
-	        <h2>${tasks[i].title}</h2>
-			<p>${tasks[i].detail}</p>
-	        `;
+	        <li><div data-id='${tasks[i].id}'>
+	        <h2 onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'>${tasks[i].title}</h2>
+			<p>${tasks[i].detail}</p>`;
 			if(tasks[i].priority == 1){
-				innerHTML += `<img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"></div></li>`;
+				innerHTML += `<img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="delete-button" style="height: 25px; width: 20px;" src="./images/trash.png" align="right" onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'></div></li>`;
 			}else if(tasks[i].priority == 2){
-				innerHTML += `<img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"></div></li>`;
+				innerHTML += `<img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="delete-button" style="height: 25px; width: 20px;" src="./images/trash.png" align="right" onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'></div></li>`;
 			}else if(tasks[i].priority == 3){
-				innerHTML += `<img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img id="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"></div></li>`;
+				innerHTML += `<img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="priority-property" style="height: 24px; width: 6px;" src="./images/active-1.png"><img class="delete-button" style="height: 25px; width: 20px;" src="./images/trash.png" align="right" onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'></div></li>`;
 			}else{
-				innerHTML += `</div></li>`
+				innerHTML += `<img class="no-priority" style="height: 24px; width: 6px;" src="./images/blank.png"><img class="delete-button" style="height: 25px; width: 20px;" src="./images/trash.png" align="right" onclick='deleteTaskOnClick(this.closest("div"), this); this.onclick=null;'></div></li>`
 			}
 		}
 		list.innerHTML = innerHTML;
@@ -57,28 +55,41 @@ function onLoad() {
 }
 
 let countDeletedTasks = 0;
-function deleteTaskOnClick(elem) {
-	let id = Number(elem.dataset.id);
-	
-	let task = readOneTask(taskStore, id, function(task) {
-		let completedTask = new CompletedTask(task.title, task.detail, task.priority);
-		addTask(completedTaskStore, completedTask, function() {
-			elem.classList.add("exit");
+function deleteTaskOnClick(targetElement, element) {
+	let id = Number(targetElement.dataset.id);
+	if(element.tagName == "H2"){
+		let task = readOneTask(taskStore, id, function(task) {
+			let completedTask = new CompletedTask(task.title, task.detail, task.priority);
+			addTask(completedTaskStore, completedTask, function() {
+				targetElement.classList.add("exit");
 
-			elem.addEventListener("animationend", function() {
+				targetElement.addEventListener("animationend", function() {
+					deleteTask(taskStore, id, function() {
+						let amountOfTasks = Number(loadData("TotalTasks")) - 1;
+						saveData("TotalTasks", amountOfTasks);
+						totalTasks.innerHTML = loadData("TotalTasks");
+
+						let amountOfCompleted = Number(loadData("CompletedTasks")) + 1;
+						saveData("CompletedTasks", amountOfCompleted);
+						completedTasks.innerHTML = loadData("CompletedTasks");
+						updateTasks();
+					});
+				});
+			});
+		});
+	}else if(element.tagName == "IMG"){
+		let task = readOneTask(taskStore, id, function(task) {
+			targetElement.classList.add("exit");
+			targetElement.addEventListener("animationend", function() {
 				deleteTask(taskStore, id, function() {
 					let amountOfTasks = Number(loadData("TotalTasks")) - 1;
 					saveData("TotalTasks", amountOfTasks);
 					totalTasks.innerHTML = loadData("TotalTasks");
-
-					let amountOfCompleted = Number(loadData("CompletedTasks")) + 1;
-					saveData("CompletedTasks", amountOfCompleted);
-					completedTasks.innerHTML = loadData("CompletedTasks");
 					updateTasks();
 				});
 			});
 		});
-	});
+	}
 	// countDeletedTasks++;
 	// if(countDeletedTasks == 5){
 	// 	decHeight()
@@ -90,7 +101,6 @@ let count = 0;
 function onEnter(i,e){
 	if (e.keyCode === 13) {
 		let task = new Task(input.value, inputDetail.value, priority);
-		console.log(task);
 		input.value = "";
 		if(i==0)
 			inputDetail.value = "";

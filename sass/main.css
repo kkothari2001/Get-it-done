@@ -1207,9 +1207,28 @@ body {
             align-items: center;
     margin: 3rem 0 12rem;
   }
-  #task-list #priority-property {
+  #task-list .priority-property {
     height: 20px !important;
     width: 5px !important;
+  }
+  #task-list .no-priority {
+    height: 20px !important;
+    width: 5px !important;
+  }
+}
+
+@media (max-width: 1100px) and (max-width: 1100px) {
+  #task-list .delete-button {
+    height: 20px !important;
+    width: 16px !important;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+  }
+  #task-list .delete-button:hover {
+    -webkit-transform: scale(1.15) !important;
+            transform: scale(1.15) !important;
   }
 }
 
@@ -1237,7 +1256,6 @@ body {
   height: -moz-fit-content;
   height: fit-content;
   margin-bottom: 2em;
-  cursor: pointer;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -1252,6 +1270,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 1rem;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 #task-list div p {
@@ -1259,9 +1278,27 @@ body {
   text-transform: capitalize;
 }
 
-#task-list div #priority-property {
+#task-list div .priority-property {
   margin: 0;
   padding: 0.13em;
+}
+
+#task-list div .no-priority {
+  margin: 0;
+  padding: 0.13em;
+}
+
+#task-list div .delete-button {
+  -webkit-transition: -webkit-transform .3s;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  cursor: pointer;
+}
+
+#task-list div .delete-button:hover {
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
 }
 
 li:first-child:nth-last-child(n + 1),

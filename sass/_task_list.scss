@@ -56,10 +56,25 @@
 		height: auto;
 		align-items: center;
 		margin: 3rem 0 12rem;
-		#priority-property{
+		.priority-property{
 			height: 20px !important;
 			width: 5px !important;
 		}
+		.no-priority{
+			height: 20px !important;
+			width: 5px !important;
+		}
+		.delete-button{
+			@media(max-width: 1100px){
+				height: 20px !important; 
+				width: 16px !important;
+				transition: transform .3s;
+				&:hover{
+					transform: scale(1.15) !important;
+				}
+			}
+		}
+		
 	}
 	li{
 		list-style: none;
@@ -74,7 +89,6 @@
 		min-width: 10rem;
 		height: fit-content;
 		margin-bottom: 2em;
-		cursor: pointer;
 		padding-top: 0.5rem;
 		padding-bottom: 0.5rem;
 		h2{
@@ -82,6 +96,7 @@
 			text-transform: uppercase;
 			margin-bottom: 1rem;
 			margin-top: 0.5rem;
+			cursor: pointer;
 			// font-size: 1.8rem;
 		}
 		p{
@@ -89,9 +104,20 @@
 			// font-size: 1.3rem;
 			text-transform: capitalize;
 		}
-		#priority-property{
+		.priority-property{
 			margin: 0;
 			padding: 0.13em;
+		}
+		.no-priority{
+			margin: 0;
+			padding: 0.13em;
+		}
+		.delete-button{
+			transition: transform .3s;
+			cursor: pointer;
+			&:hover{
+				transform: scale(1.25);
+			}
 		}
 	}
 }
