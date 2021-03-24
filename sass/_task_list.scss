@@ -85,8 +85,6 @@
 		color: rgba($color: var(--text-color), $alpha: 1);
 		box-sizing: border-box;
 		padding: 1rem;
-		min-width: 40%;
-		min-width: 10rem;
 		height: fit-content;
 		margin-bottom: 2em;
 		padding-top: 0.5rem;
@@ -103,6 +101,8 @@
 			margin-top: 1rem;
 			// font-size: 1.3rem;
 			text-transform: capitalize;
+			max-width: 200px;
+			word-wrap:break-word
 		}
 		.priority-property{
 			margin: 0;
