@@ -19,6 +19,10 @@ function updateTasks() {
 	readTasks(taskStore, function(tasks) {
 		let list = document.getElementById("task-list");
 		let innerHTML = "";
+
+		//Sorting according to priority
+		sortingTasks(tasks);
+
 		for (let i = 0; i < tasks.length; i++) {
 			innerHTML += `
 	        <li><div data-id='${tasks[i].id}'>
@@ -47,6 +51,12 @@ function updateTasks() {
 		list.innerHTML = innerHTML;
 	});
 
+}
+
+function sortingTasks(tasks){
+	tasks.sort(function (task1, task2) {
+		return priorities[task2.priority] - priorities[task1.priority];
+	});
 }
 
 function onLoad() {
@@ -94,11 +104,6 @@ function deleteTaskOnClick(targetElement, element) {
 			});
 		});
 	}
-	// countDeletedTasks++;
-	// if(countDeletedTasks == 5){
-	// 	decHeight()
-	// 	countDeletedTasks = 0;
-	// }
 }
 
 let count = 0;
@@ -120,23 +125,6 @@ function onEnter(i,e){
 			updateTasks();
 			if(i==1)
 			inputDetail.value = "";
-			// count++;
-			// console.log("count is ",count)
-			// if(count == 5){	
-			// 	incHeight();
-			// 	count = 0;
-			// }
-			todo_list.push(
-				{
-				priorityKey: priority,
-				taskKey: task
-				}
-			);
-			todo_list.sort(function (task1, task2) {
-				return priorities[task1.priority] - priorities[task2.priority];
-			});
-			console.log(todo_list);
-
 		});
 		priorityLow = document.getElementById("priority-low");
 		priorityMid = document.getElementById("priority-mid");
@@ -352,17 +340,17 @@ document.querySelector(".spare").addEventListener('click', ()=>{
 	hamburger.classList.toggle("active");
 });
 
-function incHeight() {
-    var el = document.getElementById("menu-controller");
-    var height = el.offsetHeight;
-	console.log(height);
-    var newHeight = height + 100;
-    el.style.height = newHeight + 'px';
-}
+// function incHeight() {
+//     var el = document.getElementById("menu-controller");
+//     var height = el.offsetHeight;
+// 	console.log(height);
+//     var newHeight = height + 100;
+//     el.style.height = newHeight + 'px';
+// }
 
-function decHeight() {
-    var el = document.getElementById("menu-controller");
-    var height = el.offsetHeight;
-    var newHeight = height - 100;
-    el.style.height = newHeight + 'px';
-}
+// function decHeight() {
+//     var el = document.getElementById("menu-controller");
+//     var height = el.offsetHeight;
+//     var newHeight = height - 100;
+//     el.style.height = newHeight + 'px';
+// }
