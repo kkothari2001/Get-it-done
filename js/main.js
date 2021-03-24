@@ -7,7 +7,6 @@ const maxRecentlyDeleted = 4;
 const hamburger = document.querySelector(".hamburger");
 const menu = document.querySelector('#menu');
 let priority = 0;
-var todo_list = [];
 var priorities = [0, 1, 2, 3];
 loadData("TotalTasks") || saveData("TotalTasks", 0);
 loadData("CompletedTasks") || saveData("CompletedTasks", 0);
@@ -339,18 +338,3 @@ document.querySelector(".spare").addEventListener('click', ()=>{
 	menu.classList.toggle("active");
 	hamburger.classList.toggle("active");
 });
-
-// function incHeight() {
-//     var el = document.getElementById("menu-controller");
-//     var height = el.offsetHeight;
-// 	console.log(height);
-//     var newHeight = height + 100;
-//     el.style.height = newHeight + 'px';
-// }
-
-// function decHeight() {
-//     var el = document.getElementById("menu-controller");
-//     var height = el.offsetHeight;
-//     var newHeight = height - 100;
-//     el.style.height = newHeight + 'px';
-// }
