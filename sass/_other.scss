@@ -2,7 +2,6 @@
 body {
 	margin: 0;
 	overflow-x: hidden;
-	padding-bottom: 2em;
 }
 
 .black {
@@ -108,7 +107,6 @@ body {
 	margin: 0;
 	cursor: default;
 	display: none;
-	min-height: 100vh;
 	@media (max-width: 1100px) {
 		flex-direction: column;
 	}
@@ -117,6 +115,12 @@ body {
 #main {
 	flex-grow: 1;
 	position: relative;
+	margin-left: calc(4.5vw + 70px); //menu controller width
+
+	@media (max-width: 1100px) {
+		margin-left: 0;
+		margin-top: 100px;
+	}
 }
 
 #main::after {
@@ -153,14 +157,13 @@ body {
 .priority{
 	padding-left: .5em;
 }
-
 ::selection {
 	color: rgba(var(--bg-color), $alpha: 1);
 	background: rgba(var(--text-color), $alpha: 1);
 }
 
 ::-webkit-scrollbar{
-    width: 12px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track{

@@ -11,7 +11,6 @@
 body {
   margin: 0;
   overflow-x: hidden;
-  padding-bottom: 2em;
 }
 
 .black {
@@ -157,7 +156,6 @@ body {
   margin: 0;
   cursor: default;
   display: none;
-  min-height: 100vh;
 }
 
 @media (max-width: 1100px) {
@@ -174,6 +172,14 @@ body {
       -ms-flex-positive: 1;
           flex-grow: 1;
   position: relative;
+  margin-left: calc(4.5vw + 70px);
+}
+
+@media (max-width: 1100px) {
+  #main {
+    margin-left: 0;
+    margin-top: 100px;
+  }
 }
 
 #main::after {
@@ -232,7 +238,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -284,7 +290,7 @@ body {
 }
 
 .box-area {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -684,6 +690,8 @@ body {
   width: calc(4.5vw + 70px);
   min-height: 100vh;
   height: 100%;
+  position: fixed;
+  z-index: 999;
   -ms-flex-negative: 0;
       flex-shrink: 0;
   padding-top: 40px;
@@ -732,7 +740,7 @@ body {
   transition: transform 0.6s 0s, opacity 0.6s 0.6s, -webkit-transform 0.6s 0s;
   padding: 40px;
   padding-left: 100px;
-  position: absolute;
+  position: fixed;
   top: 0;
   z-index: 2;
   -webkit-box-sizing: border-box;
@@ -849,8 +857,10 @@ body {
             align-items: center;
     width: 100%;
     min-height: auto;
-    padding-top: 0;
+    height: 100vh;
     height: 100px;
+    padding-top: 0;
+    position: absolute;
   }
   #menu-controller label {
     width: 100px;
@@ -861,6 +871,7 @@ body {
     -webkit-transform: translate(0, -120vh);
             transform: translate(0, -120vh);
     padding: 0;
+    position: absolute;
   }
   #menu-content header {
     display: -webkit-box;
@@ -897,8 +908,8 @@ body {
     margin: 7rem auto 100px;
   }
   #menu.active ~ #menu-controller {
-    -webkit-transform: translate(0, -15vh);
-            transform: translate(0, -15vh);
+    -webkit-transform: translate(0, -20vh);
+            transform: translate(0, -20vh);
   }
 }
 
@@ -1051,11 +1062,11 @@ body {
 
 @media (max-width: 1400px) {
   #input-section {
-    margin: 3rem 0 0;
+    margin: 0 3rem 2rem 3rem;
   }
   #input-section input {
     width: 100%;
-    margin: 5rem 0 0.5rem;
+    margin: 0 0 0.5rem;
     font-size: 3rem;
     text-align: center;
   }
@@ -1073,13 +1084,18 @@ body {
   }
 }
 
+span.no-priority {
+  display: inline-block;
+}
+
 #priority-container {
   display: inline-block;
   position: relative;
-  color: rgba(var(--text-color), 1);
   left: 47.5%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
+  top: 2em;
+  margin-top: 4em;
 }
 
 #priority-container .priority {
@@ -1087,7 +1103,7 @@ body {
   height: 36px;
   width: 9px;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 @media (max-width: 1100px) {
@@ -1199,13 +1215,34 @@ body {
 @media (max-width: 1100px) {
   #task-list {
     font-size: 6px;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
     height: auto;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
     margin: 3rem 0 12rem;
+  }
+  #task-list .priority-property {
+    height: 20px !important;
+    width: 5px !important;
+  }
+  #task-list .no-priority {
+    height: 20px !important;
+    width: 5px !important;
+  }
+}
+
+@media (max-width: 1100px) and (max-width: 1100px) {
+  #task-list .delete-button {
+    height: 20px !important;
+    width: 16px !important;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+  }
+  #task-list .delete-button:hover {
+    -webkit-transform: scale(1.15) !important;
+            transform: scale(1.15) !important;
   }
 }
 
@@ -1226,13 +1263,13 @@ body {
   color: rgba(var(--text-color), 1);
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 1rem 1rem;
-  min-width: 40%;
+  padding: 1rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   margin-bottom: 2em;
-  cursor: pointer;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 #task-list div:hover {
@@ -1243,10 +1280,39 @@ body {
 #task-list div h2 {
   font-weight: 700;
   text-transform: uppercase;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 #task-list div p {
+  margin-top: 1rem;
   text-transform: capitalize;
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+#task-list div .priority-property {
+  margin: 0;
+  padding: 0.13em;
+}
+
+#task-list div .no-priority {
+  margin: 0;
+  padding: 0.13em;
+}
+
+#task-list div .delete-button {
+  -webkit-transition: -webkit-transform .3s;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  cursor: pointer;
+}
+
+#task-list div .delete-button:hover {
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
 }
 
 li:first-child:nth-last-child(n + 1),
